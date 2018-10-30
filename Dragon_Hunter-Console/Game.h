@@ -5,34 +5,23 @@
 
 using namespace std;
 
-
-
-class CharacterAttack {
+class Character {
 public:
-	virtual void attack() = 0;
-};
-
-class Character :public CharacterAttack {
-	string name;
-	int hp, str, def, lvl, exp;
-
-public:
-	int currentHP;
-	int nextExp;
-	Character(string, int, int, int, int, int);
-	void create();
-	void show();
-	void potion();
-	void levelUp();
-	virtual void attack();
-};
-
-class Monster :public CharacterAttack {
 	string name;
 	int hp, str, def, exp;
-public:
+//public:
 	int currentHP;
-	Monster(string n, int h, int s, int d, int e);
-	virtual void attack();
+	Character(string, int, int, int, int);
 	void show();
+};
+
+class Player :public Character {
+public:
+	int lvl, nextExp;
+//public:
+	Player(string, int, int, int, int, int, int);
+	void create();
+	void show();
+	//void potion();
+	void levelUp();
 };
