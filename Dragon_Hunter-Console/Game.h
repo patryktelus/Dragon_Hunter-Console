@@ -9,19 +9,19 @@ class Character {
 public:
 	string name;
 	int hp, str, def, exp;
-//public:
 	int currentHP;
 	Character(string, int, int, int, int);
+	~Character();
 	void show();
 };
 
 class Player :public Character {
 public:
 	int lvl, nextExp;
-//public:
 	Player(string, int, int, int, int, int, int);
+	~Player();
 	void create();
 	void show();
-	//void potion();
+	void potion();
 	void levelUp();
 };

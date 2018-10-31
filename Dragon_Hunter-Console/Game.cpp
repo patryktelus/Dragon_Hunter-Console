@@ -5,10 +5,11 @@
 
 using namespace std;
 
+
 void Player::create() {
-	cout << "#############################" << endl;
+	cout << "################################" << endl;
 	cout << "###### Create a character ######" << endl;
-	cout << "#############################" << endl;
+	cout << "################################" << endl;
 	cout << "Name: ";
 	cin >> name;
 	cout << "Strength: ";
@@ -17,21 +18,21 @@ void Player::create() {
 	cin >> def;
 	do {
 		if ((str + def) > 10) {
-			cout << "#############################" << endl;
+			cout << "-------------------------------------------------------" << endl;
 			cout << "The sum of strength and defense cannot be more than 10." << endl;
-			cout << "-----------------------------------------------------" << endl;
-			cout << "Strength: " << endl;
+			cout << "-------------------------------------------------------" << endl;
+			cout << "Strength: ";
 			cin >> str;
-			cout << "Defence: " << endl;
+			cout << "Defence: ";
 			cin >> def;
 		}
 		else if ((str + def) < 10) {
-			cout << "#############################" << endl;
+			cout << "----------------------------" << endl;
 			cout << "You do not spend all points." << endl;
-			cout << "-------------------------------------" << endl;
-			cout << "Strength: " << endl;
+			cout << "----------------------------" << endl;
+			cout << "Strength: ";
 			cin >> str;
-			cout << "Defence: " << endl;
+			cout << "Defence: ";
 			cin >> def;
 		}
 	} while ((str + def) != 10);
@@ -39,28 +40,30 @@ void Player::create() {
 	lvl = 0;
 	exp = 0;
 	currentHP = hp;
-	nextExp = (exp + 1) * 100;
-	cout << "##############################" << endl << endl;
+	nextExp = 100;
+	cout << "################################" << endl << endl;
 }
 
 void Player::show() {
-	cout << "###############################" << endl;
-	cout << "###### " << name << " stats ######" << endl;
-	cout << "###############################" << endl;
+	cout << "----------------------------------" << endl;
+	cout << "------ " << name << " stats ------" << endl;
+	cout << "----------------------------------" << endl;
 	cout << "Name: " << name << endl;
 	cout << "HP: " << currentHP << "/" << hp << endl;
 	cout << "Strength: " << str << endl;
 	cout << "Defence: " << def << endl;
 	cout << "Level: " << lvl << endl;
 	cout << "Experience: " << exp << "/" << nextExp << endl;
-	cout << "###############################" << endl << endl;
+	cout << "----------------------------------" << endl << endl;
 }
 
 void Player::levelUp() {
 	int lp = 10;
 	int op = 0;
-	cout << "You have reached the level." << endl;
+	cout << "You have reached the level." << endl << endl;
 	lvl += 1;
+	hp += 20;
+	nextExp = (lvl + 1) * 100;
 	do {
 		cout << "You have " << lp << " learning points." << endl;
 		cout << "1. Add 1 strength point." << endl;
@@ -74,7 +77,7 @@ void Player::levelUp() {
 				lp--;
 			}
 			else {
-				cout << "You have not enough learning points." << endl;
+				cout << "You have not enough learning points." << endl << endl;
 			}			
 		}
 		else if (op == 2) {
@@ -83,7 +86,7 @@ void Player::levelUp() {
 				lp -= 5;
 			}
 			else {
-				cout << "You have not enough learning points." << endl;
+				cout << "You have not enough learning points." << endl << endl;
 			}
 		}
 		else if (op == 3) {
@@ -92,7 +95,7 @@ void Player::levelUp() {
 				lp--;
 			}
 			else {
-				cout << "You have not enough learning points." << endl;
+				cout << "You have not enough learning points." << endl << endl;
 			}
 		}
 		else if (op == 4) {
@@ -101,25 +104,34 @@ void Player::levelUp() {
 				lp -= 5;
 			}
 			else {
-				cout << "You have not enough learning points." << endl;
+				cout << "You have not enough learning points." << endl << endl;
 			}
 		}
 		else {
-			cout << "Wrong value. Try again." << endl;
+			cout << "Wrong value. Try again." << endl << endl;
 		}
 	} while (lp > 0);
 
 }
 
+void Player::potion() {
+	int x = (hp * 50) / 100;
+	cout << name << " use potion." << endl << endl;
+	currentHP += x;
+	if (currentHP > hp) {
+		currentHP = hp;
+	}
+}
+
 void Character::show() {
-	cout << "###############################" << endl;
-	cout << "########### " << name << " ###########" << endl;
-	cout << "###############################" << endl;
+	cout << "----------------------------" << endl;
+	cout << "------ " << name << " ------" << endl;
+	cout << "----------------------------" << endl;
 	cout << "HP: " << hp << endl;
 	cout << "Strength: " << str << endl;
 	cout << "Defence: " << def << endl;
 	cout << "Experience to acquire: " << exp << endl;
-	cout << "###############################" << endl << endl;
+	cout << "----------------------------" << endl << endl;
 }
 
 Character::Character(string n = "Character", int h = 100, int s = 10, int d = 0, int e = 10) {
@@ -131,7 +143,15 @@ Character::Character(string n = "Character", int h = 100, int s = 10, int d = 0,
 	currentHP = hp;
 }
 
+Character::~Character() {
+
+}
+
 Player::Player(string n = "John", int h = 100, int s = 10, int d = 0, int e = 0, int l = 0, int nexp = 100) :Character(n, h, s, d, e) {
 	lvl = l;
 	nextExp = nexp;
+}
+
+Player::~Player() {
+
 }
